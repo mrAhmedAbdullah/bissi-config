@@ -4,7 +4,22 @@ server:
 spring:
   cloud:
     gateway:
-      routes:
+     globalcors:
+      cors-configurations:
+ '[/**]':
+ allowedOrigins:
+ - "http://localhost:5173"
+ - "http://localhost:3000"
+ allowedMethods:
+  - GET
+  - POST
+  - PATCH
+  - PUT
+  - DELETE
+  - OPTIONS
+ allowedHeaders: "*"
+ allowCredentials: true
+ routes:
         - id: bissi-core-service
           uri: http://localhost:8081
           predicates:
@@ -13,3 +28,4 @@ spring:
           uri: http://localhost:8082
           predicates:
             - Path=/api/v1/audits/**
+		
