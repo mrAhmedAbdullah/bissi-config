@@ -4,27 +4,29 @@ server:
 spring:
   cloud:
     gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins:
-              - "http://localhost:5173"
-              - "http://localhost:3000"
-            allowedMethods:
-              - GET
-              - POST
-              - PATCH
-              - PUT
-              - DELETE
-              - OPTIONS
-            allowedHeaders: "*"
-            allowCredentials: true
-      routes:
-        - id: bissi-core-service
-          uri: ${CORE_SERVICE_URL:http://localhost:8081}
-          predicates:
-            - Path=/api/v1/auth/**,/api/v1/users/**,/api/v1/diaries/**,/api/v1/transactions/**
-        - id: bissi-audit-service
-          uri: ${AUDIT_SERVICE_URL:http://localhost:8082}
-          predicates:
-            - Path=/api/v1/audits/**
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - "http://localhost:5173"
+                  - "http://localhost:3000"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PATCH
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+                allowCredentials: true
+          routes:
+            - id: bissi-core-service
+              uri: ${CORE_SERVICE_URL:http://localhost:8081}
+              predicates:
+                - Path=/api/v1/auth/**,/api/v1/users/**,/api/v1/diaries/**,/api/v1/transactions/**
+            - id: bissi-audit-service
+              uri: ${AUDIT_SERVICE_URL:http://localhost:8082}
+              predicates:
+                - Path=/api/v1/audits/**
