@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bissi_audit_db
+    url: jdbc:postgresql://postgres-service:5432/bissi_audit_db
     username: postgres
     password: tajdar786
     driver-class-name: org.postgresql.Driver
